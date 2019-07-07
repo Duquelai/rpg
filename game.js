@@ -2,15 +2,15 @@ enchant();
 window.onload = function() {
   var game = new Game(300, 300);
   game.keybind(32, "a");
-  game.spriteSheetWidth = 256; //trocar aqui quando sprite aumentar
+  game.spriteSheetWidth = 336; //trocar aqui quando sprite aumentar
   game.spriteSheetHeight = 16;
   game.itemSpriteSheetWidth = 64;
   game.preload(["sprites.png", "items.png"]);
   game.items = [
-    { price: 20, description: "pino de<br> cocaina", id: 0 },
-    { price: 50, description: "Arminha<br> de dedo", id: 1, bonus: 1 },
-    { price: 120, description: "Uniforme<br> do Brasil", id: 2, bonus: 2 },
-    { price: 300, description: "Kit Gay", id: 3, bonus: 3 }
+    { price: 100, description: "Pistola", id: 0 },
+    { price: 200, description: "Revolver", id: 1, bonus: 1 },
+    { price: 400, description: "Fuzil", id: 2, bonus: 2 },
+    { price: 30, description: "Bandagem", id: 3, bonus: 3 }
   ];
   game.fps = 15;
   game.spriteWidth = 16;
@@ -55,8 +55,8 @@ window.onload = function() {
   var player = new Sprite(game.spriteWidth, game.spriteHeight);
   var setPlayer = function() {
     player.spriteOffset = 5;
-    player.startingX = 6;
-    player.startingY = 14;
+    player.startingX = 1;
+    player.startingY = 18;
     player.x = player.startingX * game.spriteWidth;
     player.y = player.startingY * game.spriteHeight;
     player.direction = 0;
@@ -69,12 +69,12 @@ window.onload = function() {
     player.characterClass = "Aviãozinho";
     player.exp = 0;
     player.level = 1;
-    player.gp = 1000;
+    player.gp = 100;
     player.levelStats = [
       {},
-      { attack: 4, maxHp: 30, maxMp: 5, expMax: 10 },
+      { attack: 3, maxHp: 30, maxMp: 5, expMax: 10 },
       { attack: 6, maxHp: 40, maxMp: 5, expMax: 30 },
-      { attack: 7, maxHp: 50, maxMp: 6, expMax: 50 }
+      { attack: 9, maxHp: 60, maxMp: 5, expMax: 50 }
     ];
     player.attack = function() {
       return player.levelStats[player.level].attack + setBonus();
@@ -254,23 +254,44 @@ window.onload = function() {
       player.statusLabel.text = message;
     }
   };
-  var morador = {
+  var cachorro = {
     action: function() {
-      npc.say("hello");
+      npc.say("au!");
     }
   };
+
+  var morador = {
+    action: function() {
+      npc.say("eai!");
+    }
+  };
+
   var shopScene = new Scene();
-  var cat = {
+  var carteiro = {
     action: function() {
       game.pushScene(shopScene);
     }
   };
   var battleScene = new Scene();
+
+  var playboy = {
+    maxHp: 20,
+    hp: 20,
+    sprite: 17,
+    attack: 2,
+    exp: 2,
+    gp: 100,
+    action: function() {
+      player.currentEnemy = this;
+      game.pushScene(battleScene);
+    }
+  };
+  
   var noia = {
-    maxHp: 10,
-    hp: 10,
+    maxHp: 14,
+    hp: 14,
     sprite: 2,
-    attack: 3,
+    attack: 4,
     exp: 3,
     gp: 5,
     action: function() {
@@ -278,43 +299,32 @@ window.onload = function() {
       game.pushScene(battleScene);
     }
   };
-  var traveco = {
-    maxHp: 10,
-    hp: 10,
-    sprite: 2,
-    attack: 3,
-    exp: 3,
-    gp: 5,
-    action: function() {
-      player.currentEnemy = this;
-      game.pushScene(battleScene);
-    }
-  };
+  
   var traficante = {
-    maxHp: 10,
-    hp: 10,
-    sprite: 2,
-    attack: 3,
-    exp: 3,
-    gp: 5,
+    maxHp: 30,
+    hp: 30,
+    sprite: 16,
+    attack: 6,
+    exp: 4,
+    gp: 50,
     action: function() {
       player.currentEnemy = this;
       game.pushScene(battleScene);
     }
   };
   var donoDaBoca = {
-    maxHp: 40,
-    hp: 40,
+    maxHp: 60,
+    hp: 60,
     sprite: 15,
-    attack: 6,
-    exp: 3,
-    gp: 5,
+    attack: 12,
+    exp: 5,
+    gp: 500,
     action: function() {
       player.currentEnemy = this;
       game.pushScene(battleScene);
     }
   };
-  var spriteRoles = [, , noia, , cat, , , , , , , , , , , donoDaBoca];
+  var spriteRoles = [, , noia, , carteiro, , , , , , , , , , , donoDaBoca, playboy, traficante, morador, , cachorro];
   var setBattle = function() {
     battleScene.backgroundColor = "#000";
     var battle = new Group();
