@@ -7,10 +7,10 @@ window.onload = function() {
   game.itemSpriteSheetWidth = 64;
   game.preload(["sprites.png", "items.png"]);
   game.items = [
-    { price: 20, description: "pino de cocaina", id: 0 },
-    { price: 50, description: "Arminha de dedo", id: 1, bonus: 1 },
-    { price: 120, description: "Uniforme do Brasil", id: 2, bonus: 3 },
-    { price: 300, description: "Kit Gay", id: 3, bonus: 1 }
+    { price: 20, description: "pino de<br> cocaina", id: 0 },
+    { price: 50, description: "Arminha<br> de dedo", id: 1, bonus: 1 },
+    { price: 120, description: "Uniforme<br> do Brasil", id: 2, bonus: 2 },
+    { price: 300, description: "Kit Gay", id: 3, bonus: 3 }
   ];
   game.fps = 15;
   game.spriteWidth = 16;
@@ -79,9 +79,13 @@ window.onload = function() {
     player.attack = function() {
       return player.levelStats[player.level].attack + setBonus();
     };
-    player.magic = function(a) {
-      player.inventory;
-      return a.bonus;
+
+    player.amountLife = function() {
+      let count = 0;
+      for (let i = 0; i < player.inventory.length; i++) {
+        player.inventory[i] == 0 ? (count += 1) : null;
+      }
+      return count;
     };
     player.hp = player.levelStats[player.level].maxHp;
     player.mp = player.levelStats[player.level].maxMp;
@@ -103,10 +107,8 @@ window.onload = function() {
       player.hp +
       "/" +
       player.levelStats[player.level].maxHp +
-      "<br />--MP: " +
-      player.mp +
-      "/" +
-      player.levelStats[player.level].maxMp +
+      "<br />--Pinos: " +
+      player.amountLife() +
       "<br />--Exp: " +
       player.exp +
       "<br />--Level: " +
@@ -236,7 +238,7 @@ window.onload = function() {
       for (var i = 0; i < player.inventory.length; i++) {
         var item = new Sprite(game.spriteWidth, game.spriteHeight);
         item.y = 130 + yOffset;
-        item.x = 30 + 70 * i;
+        item.x = 15 + 25 * i;
         item.frame = player.inventory[i];
         item.scaleX = 2;
         item.scaleY = 2;
@@ -322,7 +324,7 @@ window.onload = function() {
     battle.menu.color = "#fff";
     battle.activeAction = 0;
     battle.getPlayerStatus = function() {
-      return "HP: " + player.hp + "<br />MP: " + player.mp;
+      return "HP: " + player.hp + "<br />MP: " + player.amountLife();
     };
     battle.playerStatus = new Label(battle.getPlayerStatus());
     battle.playerStatus.color = "#fff";
@@ -374,6 +376,7 @@ window.onload = function() {
       }
     };
     battle.playerHeal = function() {
+      console.log(player.amountLife());
       if (player.inventory.includes(0)) {
         player.hp + 10 > player.levelStats[player.level].maxHp
           ? (player.hp = player.levelStats[player.level].maxHp)
@@ -633,7 +636,7 @@ window.onload = function() {
       }
     };
 
-    shop.greeting = "Eai meu patrão, qual vai ser?";
+    shop.greeting = "Tudo bom meu senhor, o que vai ser?";
     shop.apology = "Você nao tem dinheiro para isso";
     shop.sale = "Vamo la!";
     shop.farewell = "Volte sempre!";
