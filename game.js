@@ -115,7 +115,7 @@ window.onload = function() {
       player.level +
       "<br />--Dinheiro: " +
       player.gp +
-      "<br /><br />--Inventory:";
+      "<br /><br />--Inventário:";
     player.statusLabel.height = 170;
     player.showInventory(0);
   };
