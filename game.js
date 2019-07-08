@@ -72,8 +72,8 @@ window.onload = function() {
     player.gp = 100;
     player.levelStats = [
       {},
-      { attack: 3, maxHp: 30, maxMp: 5, expMax: 10 },
-      { attack: 6, maxHp: 40, maxMp: 5, expMax: 30 },
+      { attack: 3, maxHp: 40, maxMp: 5, expMax: 10 },
+      { attack: 6, maxHp: 50, maxMp: 5, expMax: 30 },
       { attack: 9, maxHp: 60, maxMp: 5, expMax: 50 }
     ];
     player.attack = function() {
