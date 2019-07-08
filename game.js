@@ -88,7 +88,7 @@ window.onload = function() {
       return count;
     };
     player.hp = player.levelStats[player.level].maxHp;
-    player.mp = player.levelStFats[player.level].maxMp;
+    player.mp = player.levelStats[player.level].maxMp;
 
     player.statusLabel = new Label("");
     player.statusLabel.width = game.width;
