@@ -65,7 +65,7 @@ window.onload = function() {
     player.image = new Surface(game.spriteSheetWidth, game.spriteSheetHeight);
     player.image.draw(game.assets["sprites.png"]);
 
-    player.name = "Pablito";
+    player.name = "Jairsinho";
     player.characterClass = "Aviãozinho";
     player.exp = 0;
     player.level = 1;
@@ -107,13 +107,13 @@ window.onload = function() {
       player.hp +
       "/" +
       player.levelStats[player.level].maxHp +
-      "<br />--Pinos: " +
-      player.amountLife() +
+      //"<br />--Pinos: " +
+      //player.amountLife() +
       "<br />--Exp: " +
       player.exp +
       "<br />--Level: " +
       player.level +
-      "<br />--GP: " +
+      "<br />--Dinheiro: " +
       player.gp +
       "<br /><br />--Inventory:";
     player.statusLabel.height = 170;
@@ -375,6 +375,7 @@ window.onload = function() {
       player.gp = Math.round(player.gp / 2);
       player.statusLabel.text = "Você perdeu!";
       player.statusLabel.height = 12;
+      window.location.reload();
     };
     battle.playerAttack = function() {
       var currentEnemy = player.currentEnemy;
@@ -396,7 +397,7 @@ window.onload = function() {
         player.inventory.splice(0, 1);
         return;
       } else {
-        battle.menu.text = "Você nao possui cocaina";
+        battle.menu.text = "Você não possui bandagem!";
         return;
       }
     };
