@@ -36,9 +36,9 @@ window.onload = function() {
   var setBonus = function() {
     var bonus = 0;
     for (i = 0; i < player.inventory.length; i++) {
+      player.inventory[i] == 0 ? (bonus += game.items[0].bonus) : null;
       player.inventory[i] == 1 ? (bonus += game.items[1].bonus) : null;
       player.inventory[i] == 2 ? (bonus += game.items[2].bonus) : null;
-      player.inventory[i] == 4 ? (bonus += game.items[3].bonus) : null;
     }
     console.log(bonus);
     return bonus;
@@ -88,7 +88,7 @@ window.onload = function() {
       return count;
     };
     player.hp = player.levelStats[player.level].maxHp;
-    player.mp = player.levelStats[player.level].maxMp;
+    player.mp = player.levelStFats[player.level].maxMp;
 
     player.statusLabel = new Label("");
     player.statusLabel.width = game.width;
@@ -388,7 +388,7 @@ window.onload = function() {
     };
     battle.playerHeal = function() {
       console.log(player.amountLife());
-      if (player.inventory.includes(0)) {
+      if (player.inventory.includes(3)) {
         player.hp + 10 > player.levelStats[player.level].maxHp
           ? (player.hp = player.levelStats[player.level].maxHp)
           : (player.hp += 10);
