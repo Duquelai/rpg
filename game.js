@@ -277,7 +277,7 @@ window.onload = function() {
   var playboy = {
     maxHp: 20,
     hp: 20,
-    sprite: 17,
+    sprite: 16,
     attack: 2,
     exp: 2,
     gp: 100,
